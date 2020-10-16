@@ -45,8 +45,8 @@ public class ans1{
         }
         for(int j = 1;j<cols;++j) {
             dp[0][j] = dp[0][j-1];
-            if(crops[0].charAt(j)==crops[0].charAt(j-1)&&crops[j].charAt(0)!='$') {
-                dp[0][j] = 1+dp[0][j];
+            if(crops[0].charAt(j)==crops[0].charAt(j-1)&&crops[0].charAt(j)!='$') {
+                dp[0][j]++;
                 String crop = crops[0];
                 crop = crop.substring(0,j)+'$'+crop.substring(j+1); 		//crop need to be changed
                 crops[0] = crop;
@@ -56,13 +56,21 @@ public class ans1{
             for(int j = 1;j<cols;++j) {
                 dp[i][j] = dp[i-1][j]+dp[i][j-1]-dp[i-1][j-1];
                 if((crops[i].charAt(j)==crops[i].charAt(j-1))||(crops[i].charAt(j)==crops[i-1].charAt(j))){
-                    dp[i][j] = 1+dp[i][j];    
+                    dp[i][j]++;    
                     String crop = crops[i];
                     crop = crop.substring(0,j)+'$'+crop.substring(j+1);		//crop need to be changed				
                     crops[i] = crop;
                 }
             }
         }
+        // for(int i=0;i<rows;i++)
+        // {
+        // 	for(int j=0;j<cols;j++)
+        // 	{
+        // 		System.out.print(dp[i][j]);
+        // 	}
+      		// System.out.println();
+        // }
         return dp[rows-1][cols-1];
     }
 }
